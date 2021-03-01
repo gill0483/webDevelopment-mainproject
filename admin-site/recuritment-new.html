@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>recuritment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <script src="bootstrap/new-jq-file.js"></script>
+    <script src="bootstrap/bootstrap.js"></script>
+    <script>
+     $(document).ready(function(){
+         $("#txtname").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z," "]*$/.test(val)==false) || len<3)
+             {$("#errname").html("*Enter valid name");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errname").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         
+        ///=====================================================
+                  $("#txtemail").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z,@,.,0-9]*$/.test(val)==false) || len<5)
+             {$("#erremail").html("*Enter valid e-mail");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#erremail").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtaddar").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || /^[0-9 ]*$/.test(val) == false || len!=12 )
+             {$("#erraddar").html("*Enter valid Adahar number");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#erraddar").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtAddr").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z,0-9,",",#,., ]*$/.test(val)==false) || len<5)
+             {$("#errAddr").html("*Enter valid address");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errAddr").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtMobile").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[0-9,+,-]*$/.test(val)==false) || (len<10 || len>15))
+             {$("#errmobile").html("*Enter valid number");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errmobile").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+        
+
+     });
+        function showpreview(file) {
+        
+        if (file.files && file.files[0])
+		 {  
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#preview").prop('src', e.target.result);   
+               
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+	}
+        
+
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row bg-danger text-white">
+            <div class="col-md-12  ">
+                <CENTER>
+                    <h3><U>ADD NEW WORKER</U></h3>
+                </CENTER>
+            </div>
+
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <form action="recuritment-new-process.php" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="txtname">Name</label>
+                            <input type="text" class="form-control" id="txtname" name="txtname" placeholder="Enter Name">
+                            <small id="errname" class="text-danger"
+                            ></small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="txtemail">Email</label>
+                            <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="example@email.com">
+                            <small id="erremail" class="text-danger"></small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="txtaddar">Addhar Number</label>
+                            <input type="text" class="form-control" id="txtaddar" name="txtaddar" placeholder="12-Digit-Number">
+                            <small id="erraddar" class="text-danger"></small>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="txtAddr">Address</label>
+                        <input type="text" class="form-control" name="txtAddr" id="txtAddr" placeholder="1234 Main Street">
+                        <small id="errAddr" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="txtMobile">Mobile</label>
+                            <input type="text" class="form-control" id="txtMobile" name="txtMobile" placeholder="10-digit-number">
+                            <small id="errmobile" class="text-danger"></small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="comboCity">city</label>
+                            <select id="comboCity" class="form-control" name="comboCity">
+                                <option selected>Choose...</option>
+                                <option value="Bathinda">Bathinda</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="malout">Malout</option>
+                                <option value="Muktsar">Muktsar</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="comboexp">Experience</label>
+                            <select id="comboexp" class="form-control" name="comboexp">
+                                <option selected>--select--</option>
+                                <option value=1>1 year</option>
+                                <option value=2>2 year</option>
+                                <option value=3>3 year</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                     <div class="form-group col-md-12">
+                      <label>speciality (optional)</label>
+                      
+                      <input type="text" id="txtspl" name="txtspl" class="form-control" placeholder="enter-any-speciality">
+                        </div>
+                      
+                    </div>
+
+                    
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="ppic">Profile Picture</label>
+                            <input type="file" class="mt-2" style="float:left" id="ppic" name="ppic" onchange="showpreview(this);">
+
+                        </div>
+                        <div class="form-group col-md-2 mt-2">
+
+                            <center>
+                                <img alt="" width="100" height="100" id="preview">
+                            </center>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6 offset-md-3">
+                            <center>
+                                <input type="submit" class="btn btn-primary mt-4" value="add worker" 
+                                >
+                            </center>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

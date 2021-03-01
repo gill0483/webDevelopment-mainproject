@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="admin2.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <script src="bootstrap/new-jq-file.js"></script>
+    <script src="bootstrap/bootstrap.js"></script>
+    <style>
+        a{
+            color: inherit;
+            
+        }
+        a:hover{
+            color: inherit;
+            text-decoration: inherit;
+        }
+    </style>
+    
+    <!!+++++===+=  modal  ==++++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <!!+++++===+===++++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <script>
+        $(document).ready(function(){
+        $("#btnSearch").click(function(){
+           
+            
+            
+            var uid=$("#txtMobile").val();
+            $.getJSON("checkworker.php?txtMobile="+uid,function(res){
+            
+                if(res.length==0)
+					alert("Invalid id");
+				else
+					{
+                         $("#txtname").prop("disabled","");
+				$("#txtemail").prop("disabled","");
+				$("#txtaddar").prop("disabled","");
+                $("#txtAddr").prop("disabled","");
+                $("#comboCity").prop("disabled",""); 
+                $("#comboexp").prop("disabled","");
+                $("#txtspl").prop("disabled","");
+                $("#ppic").prop("disabled","");
+				
+				$("#txtname").val(res[0].name);
+				$("#txtemail").val(res[0].email);
+				$("#txtaddar").val(res[0].addar);
+                $("#txtAddr").val(res[0].address);
+                $("#comboCity").val(res[0].city); 
+                $("#comboexp").val(res[0].experience);
+                $("#txtspl").val(res[0].speciality);
+                $("#preview").prop('src','uploads/'+res[0].ppic);
+					}
+            });
+        });
+        
+    });
+    function showpreview(file) {
+        
+        if (file.files && file.files[0])
+		 {  
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#preview").prop('src', e.target.result);   
+               
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+	} 
+        
+    
+    </script>
+    <!!+++++===+===++++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <!!+++++===+===+  modal  +++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    
+    <!!+++++===+===++++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <!!+++++===+===++ smart check ++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <script>
+    $(document).ready(function(){
+        
+        
+        $("#txtname").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z," "]*$/.test(val)==false) || len<3)
+             {$("#errname").html("*Enter valid name");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errname").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         
+        ///=====================================================
+                  $("#txtemail").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z,@,.,0-9]*$/.test(val)==false) || len<5)
+             {$("#erremail").html("*Enter valid e-mail");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#erremail").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtaddar").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || /^[0-9 ]*$/.test(val) == false || len!=12 )
+             {$("#erraddar").html("*Enter valid Adahar number");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#erraddar").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtAddr").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[a-zA-Z,0-9,",",#,., ]*$/.test(val)==false) || len<5)
+             {$("#errAddr").html("*Enter valid address");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errAddr").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+                  $("#txtMobile").blur(function(){
+         var val=$(this).val();
+             var len=$(this).val().length;
+             //alert(/^[a-zA-Z ]*$/.test(val));
+            
+             if(val=="" || (/^[0-9,+,-]*$/.test(val)==false) || (len<10 || len>15))
+             {$("#errmobile").html("*Enter valid number");
+              $(this).addClass("border-danger");
+             }
+             else
+                 {
+                  $("#errmobile").html("");
+                   $(this).removeClass("border-danger");  
+                  $(this).addClass("border-success");   
+                 }
+     });
+         ///=====================================================
+    });
+    </script>
+    <!!+++++===+===++++++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+    <!!+++++===+===++++  box check++++++++++++++++++++++=====+++++++++++==++=+=+==+=+==+==+=+=+>
+</head>
+<body>
+    <!!============ modal  ++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+       <!!===============++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+       <!!===============++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+         Details of workers</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+       <!!======================================================!!>
+        <div class="container">
+        
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                <form action="recuirtment-update-process.php" method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        
+                        <div class="form-group col-md-12">
+
+                            <center>
+                                <img alt="" width="150" height="150" id="preview">
+                            </center>
+                           <center> <input type="file" class="mt-4" style="float:left" id="ppic" name="ppic" onchange="showpreview(this);" disabled></center>
+                        </div>
+                    
+                    <div class="form-row">
+                          <div class="form-group col-md-12 ">
+                            <label for="txtMobile"><b><u>Enter Mobile No. for details</u></b></label>
+                        </div>
+                           
+                        </div>  
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-12">
+                            <label for="txtMobile">Mobile or UID</label>
+                            <input type="text" class="form-control" id="txtMobile" name="txtMobile" placeholder="10-digit-number OR UID" >
+                        </div>
+                        
+                    </div>
+                    <div class="form-group col-md-8 offset-2">
+							
+							<center><input type="button" class="form-control btn-danger" id="btnSearch" value="Get Details"></center>
+						</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="txtname">Name</label>
+                            <input type="text" class="form-control" id="txtname" name="txtname" disabled>
+                            <small id="errname" class="text-danger"
+                            ></small>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="txtemail">Email</label>
+                            <input type="text" class="form-control" id="txtemail" name="txtemail"  disabled>
+                            <small id="erremail" class="text-danger"></small>
+                        </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="txtaddar">Addhar Number</label>
+                            <input type="text" class="form-control" id="txtaddar" name="txtaddar" disabled>
+                            <small id="erraddar" class="text-danger"></small>
+                        </div>
+                    <div class="form-group col-md-12">
+                        <label for="txtAddr">Address</label>
+                        <input type="text" class="form-control" name="txtAddr" id="txtAddr" disabled>
+                    </div>
+                    </div>
+
+                    <div class="form-row">
+                        
+                        <div class="form-group col-md-12">
+                            <label for="comboCity">city</label>
+                            <select id="comboCity" class="form-control" name="comboCity" disabled>
+                                <option selected></option>
+                                <option value="Bathinda">Bathinda</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="malout">Malout</option>
+                                <option value="Muktsar">Muktsar</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="comboexp">Experience</label>
+                            <select id="comboexp" class="form-control" name="comboexp" disabled>
+                                <option selected></option>
+                                <option value=1>1 year</option>
+                                <option value=2>2 year</option>
+                                <option value=3>3 year</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                     <div class="form-group col-md-12">
+                      <label>speciality</label>
+                      
+                      <input type="text" id="txtspl" name="txtspl" class="form-control" disabled>
+                        </div>
+                      
+                    </div>
+
+                <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="save changes">
+      </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+     
+    <! //============================================!>
+     
+      </div>
+      
+    </div>
+  </div>
+</div>
+   <!!===============++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+   <!!===============++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++><!!==========  modal  =++++=+=+=+++=+=++==+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+    
+     
+ <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm ">
+  <h4 class="my-0 mr-md-auto font-weight-normal"><b>Control Panel</b></h4>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="#">Features</a>
+    <a class="p-2 text-dark" href="#">Enterprise</a>
+    <a class="p-2 text-dark" href="#">Support</a>
+    <a class="p-2 text-dark" href="#">Pricing</a>
+  </nav>
+  <a class="btn btn-outline-primary" href="#">sign up</a>
+</div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Access Features</h1>
+  
+</div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h2 class="my-0 font-weight-normal">Recuritment</h2>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title pricing-card-title">Add Information: <small class="text-muted"></small></h5>
+        <ul  class="list-unstyled mt-3 mb-4">
+          <li></li>
+          <li>Address </li>
+          <li>Mobile Number </li>
+          <li>Profile Picture </li>
+        </ul>
+        <a class="btn btn-lg btn-block btn-primary" href="recuritment-new.html">Add New Worker</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h2 class="my-0 font-weight-normal">Deatils of workers</h2>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title pricing-card-title">can access:<small class="text-muted"></small></h5>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Any Updation</li>
+          <li>Modification</li>
+          <li>Addhar number</li>
+          <li></li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
+Get Details 
+</button>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h2 class="my-0 font-weight-normal">Allotment</h2>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title pricing-card-title">can access: <small class="text-muted"></small></h5>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>current location</li>
+          <li>allot workers</li>
+          <li>get status of workers</li>
+          <li></li>
+        </ul>
+          <a class="btn btn-lg btn-block btn-primary" href="input-complain.php">Allotment</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">&copy; 2017-{{ site.time | date: "%Y" }}</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Cool stuff</a></li>
+          <li><a class="text-muted" href="#">Random feature</a></li>
+          <li><a class="text-muted" href="#">Team feature</a></li>
+          <li><a class="text-muted" href="#">Stuff for developers</a></li>
+          <li><a class="text-muted" href="#">Another one</a></li>
+          <li><a class="text-muted" href="#">Last time</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Resource</a></li>
+          <li><a class="text-muted" href="#">Resource name</a></li>
+          <li><a class="text-muted" href="#">Another resource</a></li>
+          <li><a class="text-muted" href="#">Final resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+          <li><a class="text-muted" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+     
+     
+</body>
+</html>
